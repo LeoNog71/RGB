@@ -8,10 +8,19 @@ package rgb;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -39,6 +48,21 @@ public class RGB {
                     blue[new Color(imagem.getRGB(j, i)).getBlue()]++;  
                 }
             }
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        
+        for (int i = 0; i<256 ;i++) {
+            String aux = String.valueOf(i);
+            dataset.addValue(red[i], "R", aux);
+            dataset.addValue(green[i], "G", aux);
+            dataset.addValue(blue[i], "B", aux);
+        }
+        JFreeChart chart = ChartFactory.createLineChart("Histograma","intensidade","frequencia",
+                dataset,PlotOrientation.VERTICAL,true, true, false);
+        OutputStream arquivo = new FileOutputStream("grafico.png");
+        ChartUtilities.writeChartAsPNG(arquivo, chart, 550, 400);
+        arquivo.close();
+            
+            
             
             
             
