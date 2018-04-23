@@ -41,6 +41,9 @@ public class RGB {
                 pasta= jfc.getSelectedFile().getAbsoluteFile().toString();            
                 System.out.println(pasta);
             }
+            
+            
+            
             BufferedImage imagem = ImageIO.read(new File(pasta));
             
             int altura = imagem.getHeight();
@@ -56,6 +59,9 @@ public class RGB {
                     blue[new Color(imagem.getRGB(j, i)).getBlue()]++;  
                 }
             }
+            
+            
+            
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         for (int i = 0; i<256 ;i++) {
@@ -64,19 +70,20 @@ public class RGB {
             dataset.addValue(green[i], "G", aux);
             dataset.addValue(blue[i], "B", aux);
         }
-            int x =0;
-            for (int i : green) {
-                System.out.println(x+"->"+i);
-                x++;
-            }
         
         
         JFreeChart chart = ChartFactory.createLineChart("Histograma","intensidade","frequencia",
                 dataset,PlotOrientation.VERTICAL,true, true, false);
-        OutputStream arquivo = new FileOutputStream("grafico.pdf");
+        
+       chart.getCategoryPlot().getRenderer(0).setSeriesPaint(0, Color.RED);
+        chart.getCategoryPlot().getRenderer(0).setSeriesPaint(1, Color.GREEN);
+        chart.getCategoryPlot().getRenderer(0).setSeriesPaint(2, Color.BLUE);
+        
+        OutputStream arquivo = new FileOutputStream("grafico.png");
         ChartUtilities.writeChartAsPNG(arquivo, chart, 1600, 900);
         arquivo.close();
-            
+        
+        
             
             
             
