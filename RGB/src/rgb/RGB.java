@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -33,7 +34,14 @@ public class RGB {
      */
     public static void main(String[] args) {
         try {
-            BufferedImage imagem = ImageIO.read(new File("/home/nogueira/Downloads/indice.jpeg"));
+            String pasta= "";
+            JFileChooser jfc=new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
+                pasta= jfc.getSelectedFile().getAbsoluteFile().toString();            
+                System.out.println(pasta);
+            }
+            BufferedImage imagem = ImageIO.read(new File(pasta));
             
             int altura = imagem.getHeight();
             int largura = imagem.getWidth();
@@ -56,10 +64,17 @@ public class RGB {
             dataset.addValue(green[i], "G", aux);
             dataset.addValue(blue[i], "B", aux);
         }
+            int x =0;
+            for (int i : green) {
+                System.out.println(x+"->"+i);
+                x++;
+            }
+        
+        
         JFreeChart chart = ChartFactory.createLineChart("Histograma","intensidade","frequencia",
                 dataset,PlotOrientation.VERTICAL,true, true, false);
-        OutputStream arquivo = new FileOutputStream("grafico.png");
-        ChartUtilities.writeChartAsPNG(arquivo, chart, 550, 400);
+        OutputStream arquivo = new FileOutputStream("grafico.pdf");
+        ChartUtilities.writeChartAsPNG(arquivo, chart, 1600, 900);
         arquivo.close();
             
             
