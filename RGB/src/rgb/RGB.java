@@ -36,7 +36,9 @@ public class RGB {
         try {
             String pasta= "";
             JFileChooser jfc=new JFileChooser();
+            
             jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            
             if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
                 pasta= jfc.getSelectedFile().getAbsoluteFile().toString();            
                 System.out.println(pasta);
