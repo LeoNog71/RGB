@@ -61,18 +61,21 @@ public class Limiar {
             
                     
                     tomDeCinza = media.intValue();
+                    
                     pixels[0] = tomDeCinza;
                     pixels[1] = tomDeCinza;
                     pixels[2] = tomDeCinza;
-                    // escrevo no WritableRaster novamente a matriz de pixels desse eixo...
+                   
                     r.setPixel(j, i, pixels);
                     
                     
-                    //System.out.println(tomDeCinza);
+                   
                     mascaraBoleean[i][j] = tomDeCinza > 128;
                 }
                 media = 0.0;
             }
+            
+        //salvando a imagem
         imagem.setData(r);
         
         try {
