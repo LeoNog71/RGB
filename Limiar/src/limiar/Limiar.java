@@ -74,9 +74,9 @@ public class Limiar {
                 media = 0.0;
             }
         imagem.setData(r);
-        String figuraModi= "nova figura";
+        
         try {
-              ImageIO.write(imagem, "png", new File(figuraModi+".png"));
+              ImageIO.write(imagem, "png", new File("/home/nogueira/Imagens/tonsDecinza.png"));
         } catch (IOException ex) {
                System.out.println("Erro 2.:"+ex);
         } catch (Exception ex) {
