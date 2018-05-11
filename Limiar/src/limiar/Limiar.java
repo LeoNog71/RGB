@@ -65,12 +65,17 @@ public class Limiar {
                     pixels[0] = tomDeCinza;
                     pixels[1] = tomDeCinza;
                     pixels[2] = tomDeCinza;
-                   
-                    r.setPixel(j, i, pixels);
+                    
+                    if(tomDeCinza > 254){
+                        int p[] = {0,0,0}; 
+                        r.setPixel(j, i, p);
+                        //r.setPixel(j, i, pixels);
+                    }
                     
                     
+                    
                    
-                    mascaraBoleean[i][j] = tomDeCinza > 128;
+                    //mascaraBoleean[i][j] = tomDeCinza > 128;
                 }
                 media = 0.0;
             }
@@ -81,9 +86,9 @@ public class Limiar {
         try {
               ImageIO.write(imagem, "png", new File("/home/nogueira/Imagens/tonsDecinza.png"));
         } catch (IOException ex) {
-               System.out.println("Erro 2.:"+ex);
+               System.out.println("Erro :"+ex);
         } catch (Exception ex) {
-               System.out.println("Erro 2.1.:"+ex);
+               System.out.println("Erro 2:"+ex);
         }
          } catch (IOException ex) {
              System.out.println(ex);
